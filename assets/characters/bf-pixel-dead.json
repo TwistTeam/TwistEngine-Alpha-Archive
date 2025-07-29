@@ -1,0 +1,28 @@
+{
+	"animations": [
+		{
+			"offsets": [-30, -12],
+			"name": "RETRY CONFIRM",
+			"anim": "deathConfirm"
+		},
+		{
+			"loop": true,
+			"offsets": [-30, -12],
+			"name": "Retry Loop",
+			"anim": "deathLoop"
+		},
+		{
+			"name": "BF Dies pixel",
+			"anim": "firstDeath"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/bfPixelsDEAD",
+	"position": [0, 350],
+	"healthicon": "bf-pixel",
+	"flip_x": true,
+	"healthbar_colors": [123, 214, 246],
+	"camera_position": [50, -60],
+	"sing_duration": 4,
+	"scale": 6
+}

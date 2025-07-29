@@ -1,0 +1,8 @@
+### VS Code
+dump/*
+export/*
+### .vscode/*
+crash-dialog/build/*
+.haxelib/*
+*/.build_time
+node_modules/*

@@ -1,0 +1,88 @@
+{
+	"animations": [
+		{
+			"offsets": [-5, 0],
+			"anim": "idle",
+			"name": "BF idle dance"
+		},
+		{
+			"offsets": [5, -6],
+			"anim": "singLEFT",
+			"name": "BF NOTE LEFT0"
+		},
+		{
+			"offsets": [-20, -51],
+			"anim": "singDOWN",
+			"name": "BF NOTE DOWN0"
+		},
+		{
+			"offsets": [-46, 27],
+			"anim": "singUP",
+			"name": "BF NOTE UP0"
+		},
+		{
+			"offsets": [-48, -7],
+			"anim": "singRIGHT",
+			"name": "BF NOTE RIGHT0"
+		},
+		{
+			"offsets": [7, 19],
+			"anim": "singLEFTmiss",
+			"name": "BF NOTE LEFT MISS"
+		},
+		{
+			"offsets": [-15, -19],
+			"anim": "singDOWNmiss",
+			"name": "BF NOTE DOWN MISS"
+		},
+		{
+			"offsets": [-46, 27],
+			"anim": "singUPmiss",
+			"name": "BF NOTE UP MISS"
+		},
+		{
+			"offsets": [-44, 22],
+			"anim": "singRIGHTmiss",
+			"name": "BF NOTE RIGHT MISS"
+		},
+		{
+			"offsets": [-3, 5],
+			"anim": "hey",
+			"name": "BF HEY"
+		},
+		{
+			"offsets": [14, 18],
+			"anim": "hurt",
+			"name": "BF hit"
+		},
+		{
+			"loop": true,
+			"offsets": [-4, 0],
+			"anim": "scared",
+			"name": "BF idle shaking"
+		},
+		{
+			"offsets": [-10, -16],
+			"anim": "dodge",
+			"name": "boyfriend dodge"
+		},
+		{
+			"offsets": [294, 267],
+			"anim": "attack",
+			"name": "boyfriend attack"
+		},
+		{
+			"offsets": [-40, -40],
+			"anim": "pre-attack",
+			"name": "bf pre attack"
+		}
+	],
+	"image": "characters/BOYFRIEND",
+	"position": [0, 350],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 1
+}

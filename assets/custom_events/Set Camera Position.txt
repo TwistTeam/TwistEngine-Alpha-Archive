@@ -1,0 +1,3 @@
+Value1: Optional Position
+Value2: Optional Tween Options (time, ease)
+Value3: Optional Input position for reuse (example: "alt1" or center)

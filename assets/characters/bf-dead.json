@@ -1,0 +1,28 @@
+{
+	"animations": [
+		{
+			"offsets": [37, 11],
+			"name": "BF dies",
+			"anim": "firstDeath"
+		},
+		{
+			"offsets": [37, 5],
+			"loop": true,
+			"name": "BF Dead Loop",
+			"anim": "deathLoop"
+		},
+		{
+			"offsets": [37, 69],
+			"name": "BF Dead confirm",
+			"anim": "deathConfirm"
+		}
+	],
+	"image": "characters/BOYFRIEND_DEAD",
+	"position": [0, 350],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [49, 176, 209],
+	"camera_position": [0, 0],
+	"sing_duration": 4,
+	"scale": 1
+}

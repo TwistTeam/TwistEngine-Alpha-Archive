@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- _________________________ Application Settings _________________________ -->
+
+	<app
+		title="Friday Night Funkin' Twist Engine"
+		file="TwistEngine"
+		main="game.Main"
+		version="0.1.0"
+		packageName="com.redar13.twist.main"
+		package="com.redar13.twist.main"
+		company="Redar13"
+	/>
+	<app if="mobile native" title="FNF Twist Engine" packageName="com.redar13.deftwist" package="com.redar13.deftwist"/>
+
+	<launchImage path="artStuff/twistEngine_psychEdition.png" if="ios"/>
+
+	<!--Switch Export with Unique ApplicationID and Icon-->
+	<set name="APP_ID" value="0x0100f6c013bbc000" />
+
+	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND -->
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/> <!-- stable luas PUT AFTER FIRST LINE WITH APP NAME AND ETC -->
+
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="HIIMSTUPIDSNAKE"/>
+
+	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
+		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal" -->
+	<!-- <app preloader="Preloader" resizable="true" /> -->
+	<app preloader="flixel.system.FlxPreloader" />
+
+	<!-- Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2 -->
+	<set name="SWF_VERSION" value="11.8" />
+
+	<!-- ____________________________ Window Settings ___________________________ -->
+
+	<!-- These window settings apply to all targets -->
+	<window
+		width="1280" height="720"
+		background="#000000"
+		hardware="true"
+		vsync="false"
+		allow-high-dpi="true"
+	/>
+	<window antialiasing="2" unless="mobile native"/> <!-- avoid malfunctions in the android emulator -->
+
+	<!-- HTML5-specific -->
+	<window if="html5" resizable="true" />
+
+	<!-- Desktop-specific-->
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
+
+	<!-- Mobile-specific -->
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false" />
+
+	<!-- ______________________ TWIST ENGINE CUSTOMIZATION ______________________ -->
+
+	<!-- Type of build -->
+	<define name="DEV_BUILD"/>
+	<!-- <define name="RELEASE_BUILD"/> -->
+	<undefine name="DEV_BUILD" if="RELEASE_BUILD"/>
+
+	<haxeflag name="-D" value="final" if="RELEASE_BUILD" />
+
+	<!-- <haxedef name="TEST_VERSION" /> -->
+
+	<define name="MODS_ALLOWED" unless="RELEASE_BUILD" if="desktop" />
+	<define name="LUA_ALLOWED" if="desktop cpp" />
+	<define	name="HSCRIPT_ALLOWED"/>
+	<haxedef name="MULTI_THREADING_ALLOWED" if="desktop || mobile"/>
+	<haxedef name="LOGS_TRACES_ON_CRASH" unless="RELEASE_BUILD"/>
+	<define name="HAXE_UI" unless="display || display_details || RELEASE_BUILD"/>
+	<haxedef name="EDITORS_ALLOWED" unless="mobile || RELEASE_BUILD"/>
+	<haxedef name="ACHIEVEMENTS_ALLOWED" />
+	<haxedef name="COLOR_CORRECTION_ALLOWED" if="TEST_VERSION" />
+	<!-- <define name="UPDATE_FEATURE" unless="hl" if="desktop"/> --> <!-- todo: Android support -->
+	<!-- <define name="THREE_D_ALLOWED" /> -->
+	<define name="USE_SYS_ASSETS" unless="mobile || web"/> <!-- todo: Android support -->
+	<define name="EMBED_FILES" unless="web" if="RELEASE_BUILD" value="*.hx|*.lua" />
+	<define name="VIDEOS_ALLOWED" unless="hl" if="cpp" />
+	<haxedef name="ZIPLIBS_ALLOWED" unless="mobile"/>
+	<define name="ALLOW_HAPTICS" if="mobile" />
+	<define name="ALLOW_EIGHTSINES" if="mobile" />
+	<define name="TOUCH_CONTROLS" if="mobile" />
+	<!--
+	<haxedef name="MUTEX_TRACES" if="sys target.threaded !no_traces" />
+	-->
+	<haxedef name="no_traces" if="RELEASE_BUILD" />
+	<define name="DISCORD_RPC" if="desktop cpp" unless="hl"/>
+	<section if="VIDEOS_ALLOWED cpp" >
+		<define name="HXVLC_NO_SHARE_DIRECTORY"/>
+		<!-- <define name="HXVLC_ENABLE_STATS"/> -->
+		<!--
+		<define name="HXVLC_PLAYLIST_PATH" value="assets/hxvlc" />
+		<define name="HXVLC_VIDEO_FINALIZER"/>
+		-->
+	</section>
+
+	<!-- "classic", "indent", "pretty" -->
+	<haxedef name="message.reporting" value="pretty"/>
+
+	<haxedef name="SOUNDTRAY_BARS_COUNT" value="15"/>
+	<haxedef name="SOUNDTRAY_WIDTH" value="100"/>
+
+	<haxedef name="openfl_disable_graphics_pixel_snapping"/>
+	<haxedef name="openfl_pool_events"/>
+
+	<!-- Support for compatibility of the psych note system. -->
+	<haxedef name="NOTE_BACKWARD_COMPATIBILITY" />
+
+	<!-- HScript -->
+	<haxedef name="ALLOW_SCRIPTED_STATES" />
+	<haxedef name="COMPILE_ALL_CLASSES"/>
+	<haxedef name="CUSTOM_CLASSES" />
+	<haxedef name="GLOBAL_SCRIPT" />
+	<haxedef name="NON_COMPLILE_REDEFINED_CLASSES" />
+
+	<define name="UI_POPUPS" if="HAXE_UI"/>
+
+	<define name="PROJECT_LOGS_ALLOWED"/>
+
+	<!-- _____________________________ Path Settings ____________________________ -->
+
+	<set name="BUILD_DIR" value="export/debug"			 if="debug DEV_BUILD" />
+	<set name="BUILD_DIR" value="export/dev"			 if="DEV_BUILD" unless="debug" />
+	<set name="BUILD_DIR" value="export/release"		 if="RELEASE_BUILD" />
+	<set name="BUILD_DIR" value="export/release-32bits"	 if="RELEASE_BUILD 32bits" />
+
+	<!-- idk -->
+	<!--<assets path="plugins/" rename="" />-->
+
+	<define name="PRELOAD_ALL"		unless="web" />
+	<define name="NO_PRELOAD_ALL"	unless="PRELOAD_ALL" />
+
+	<define name="DEFAULT_EXCLUDE" value="*.ogg" if="web" /> <!-- *.ogg works 50/50 on different browsers -->
+	<define name="DEFAULT_EXCLUDE" value="" unless="web" />
+
+	<library name="embed" embed="true"/>
+
+	<section unless="USE_SYS_ASSETS">
+		<library name="assets" preload="PRELOAD_ALL"/>
+		<library name="embed" preload="PRELOAD_ALL"/>
+
+		<section if="EMBED_FILES">
+			<assets path="assets" lib="assets" exclude="${EMBED_FILES}" embed="true"/>
+			<!-- <assets path="secret_assets" lib="assets" rename="assets" exclude="${EMBED_FILES}" embed="true"/> -->
+		</section>
+		<section unless="EMBED_FILES">
+			<assets path="assets" lib="assets" exclude="${DEFAULT_EXCLUDE}"/>
+			<assets path="secret_assets" lib="assets" rename="assets" exclude="${DEFAULT_EXCLUDE}"/>
+		</section>
+	</section>
+
+	<assets path="embedAssets" rename="assets" lib="embed" embed="true"/>
+	<assets path="mobileAssets" rename="assets" lib="assets" embed="false" if="mobile"/>
+
+	<section if="MODS_ALLOWED">
+		<assets path="example_mods" rename="mods" embed="false" />
+		<assets path="modsFolders.txt" embed="false" />
+	</section>
+
+	<assets path="badapplelol.mp4" rename="assets/videos/badapplelol.mp4" embed="false"  if="debug VIDEOS_ALLOWED" />
+
+	<!-- OpenAL config -->
+	<section if="desktop">
+		<assets path="alsoft.ini" rename="plugins/alsoft.ini" type="text" if="windows"/>
+		<assets path="alsoft.ini" rename="plugins/alsoft.conf" type="text" unless="windows"/>
+	</section>
+
+	<!-- _______________________________ Libraries ______________________________ -->
+
+	<haxelib name="lime" version="8.1.3"/>
+	<haxelib name="openfl" version="9.3.4"/>
+	<haxelib name="flixel" version="5.6.2"/>
+	<!-- <haxelib name="nape-haxe4" optional="true" /> -->
+	<assets path="flixel" embed="true" exclude="${DEFAULT_EXCLUDE}"/>
+	<!-- <haxedev set='webgl' /> -->
+	<haxelib name="flixel-addons" value="3.2.3"/>
+	<haxelib name="flixel-ui" value="2.6.1"/>
+
+	<haxelib name="extension-androidtools" if="android native" />
+	<haxelib name="extension-haptics" if="ALLOW_HAPTICS" />
+	<haxelib name="extension-orientation" if="ALLOW_EIGHTSINES" />
+
+	<haxelib name="away3d"				if="THREE_D_ALLOWED" />
+	<!-- <haxelib name="format"/> -->
+	<haxelib name="hscript-improved"	if="HSCRIPT_ALLOWED"/>
+	<haxelib name="hxvlc" 				if="VIDEOS_ALLOWED"/>
+	<haxelib name="linc_luajit"			if="LUA_ALLOWED" />
+	<haxelib name="thx.semver"/>
+	<!-- <haxelib name="yagp" optional="true" /> --> <!-- gif -->
+	<!--
+		<haxedef name="HXCPP_MSVC"			if="cpp"/>
+	-->
+	<haxelib name="hxdiscord_rpc"	optional="true" if="DISCORD_RPC" />
+	<haxelib name="flxanimate"/>
+
+	<haxelib name="funk.vis"		optional="true" />
+	<haxelib name="grig.audio"		if="funk.vis" />
+
+	<haxelib name="haxeui-core"		optional="true" if="HAXE_UI" version="1.7.0"/>
+	<haxelib name="haxeui-openfl"	optional="true" if="HAXE_UI" version="1.7.0"/>
+
+	<!-- Enables a terminal log prompt on debug builds. -->
+	<haxelib name="hxcpp-debug-server"		optional="true" if="debug"/>
+
+	<!-- Rewrited haxelibs (TODO: Automate register files) -->
+	<classpath name="rewritedLibs/flixel" />
+	<classpath name="rewritedLibs/flxanimate" />
+	<classpath name="rewritedLibs/haxe" />
+	<classpath name="rewritedLibs/lime" />
+	<classpath name="rewritedLibs/openfl" />
+	<classpath name="rewritedLibs/spine" />
+
+	<classpath name="source" /> <!-- Base Game -->
+
+	<!-- ______________________________ Haxedefines _____________________________ -->
+
+	<!-- If haxelib doesn't exists, it turn off defines -->
+	<section if="HAXE_UI">
+		<section unless="haxeui-core">
+			<log warn="'haxeui-core' do not exist, disable the library definitions" if="PROJECT_LOGS_ALLOWED" />
+			<undefine name="HAXE_UI"/>
+			<undefine name="UI_POPUPS"/>
+		</section>
+	</section>
+
+	<section if="HAXE_UI UI_POPUPS">
+		<section unless="haxeui-openfl">
+			<log warn="'haxeui-openfl' do not exist, disable the library definitions" if="PROJECT_LOGS_ALLOWED" />
+			<undefine name="UI_POPUPS"/>
+		</section>
+	</section>
+
+	<section if="DISCORD_RPC">
+		<section unless="hxdiscord_rpc">
+			<log warn="'hxdiscord_rpc' do not exist, disable the library definitions" if="PROJECT_LOGS_ALLOWED" />
+			<undefine name="DISCORD_RPC"/>
+		</section>
+	</section>
+
+	<haxedef name="hscriptPos"/>
+	<haxedef name="CPP_WINDOWS" if="cpp windows"/>
+	<haxedef name="CPP_LINUX" if="cpp linux"/>
+
+	<haxedef name="FLX_NO_TOUCH" if="desktop"/>
+	<!-- <haxedef name="FLX_NO_HEALTH"/> -->
+	<haxedef name="ANIMATE_NO_PIVOTPOINT"/>
+
+	<!-- Disable the Flixel core focus lost screen -->
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN"/>
+
+	<haxedef name="FLX_NO_DEBUG" unless="debug"/>
+
+	<!-- <haxedef name="DISCORD_DISABLE_IO_THREAD"	if="DISCORD_RPC" /> -->
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="linux" />
+
+	<!--
+	<haxedef name="gl_stats"/>
+	-->
+
+	<!-- <set name="HXCPP_CACHE_MB" value="2000" /> -->
+
+	<!--hxVLC Defines-->
+	<section if="VIDEOS_ALLOWED debug">
+		<!--The level of verbosity that is being used for logging-->
+		<!--
+		<haxedef name="HXVLC_VERBOSE" value="2"/>
+		-->
+
+		<!--Disable libVLC logging on hxVLC-->
+		<undefine name="HXVLC_LOGGING"/>
+	</section>
+
+	<!-- Run a script before and after building. -->
+	<prebuild haxe="tools/Prebuild.hx"/>
+	<postbuild haxe="tools/Postbuild.hx"/>
+
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE" /> <!-- Fix paths contain non-English characters, how -->
+
+	<!--Enable this for Nape release builds for a serious peformance improvement-->
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<!-- <haxedef name="HXCPP_DEBUGGER" if="DEV_BUILD"/> -->
+
+	<!-- Build game with clang compiler instead of MSVC -->
+	<haxedef name="HXCPP_CLANG"/>
+
+	<!-- Allow storage of bigger sprites and memory usage above 2.99 GB. -->
+	<!-- <haxedef name="HXCPP_GC_BIG_BLOCKS"/> -->
+
+	<!-- Allows the game to dynamically change expand memory working space if required.	-->
+	<haxedef name="HXCPP_GC_DYNAMIC_SIZE"/>
+
+	<!--
+	<section if="debug">
+		<haxedef name="HXCPP_DEBUG_LINK" />
+	</section >
+	-->
+	<haxedef name="no-deprecation-warnings" />
+
+	<!-- Fix compiling issues - CDE -->
+	<!-- ❌ - Ranbins -->
+	<!-- <setenv name="HAXEPATH" value="./"/> -->
+
+	<haxeflag name="-dce" value="no" />
+	<haxeflag name="--macro" value="game.backend.system.macros.MainMacro.dogo()" />
+	<haxeflag name="--macro" value="game.backend.system.macros.MainMacro.run()" />
+
+	<!-- _________________________________ Custom _______________________________ -->
+	<!-- Place custom nodes like icons here (higher priority to override the HaxeFlixel icon) -->
+
+	<!--
+	<icon path="artStuff/icon16.png" priority="-5" size="16" unless="mobile" />
+	<icon path="artStuff/iconOG.svg" />
+	<icon path="artStuff/iconOG.svg" size="1024" />
+	<icon path="artStuff/iconOG.svg" size="2048" />
+	-->
+
+	<section unless="mobile">
+		<assets path='artStuff/iconTWAOG.png' rename='icon.png' if="linux" />
+		<icon path="artStuff/iconTWA16.png" priority="-5" size="16" />
+		<icon path="artStuff/iconTWA32.png" />
+		<icon path="artStuff/iconTWA64.png" size="64" />
+		<icon path="artStuff/iconTWAOG.png" size="128" />
+		<icon path="artStuff/iconTWAOG.png" size="256" />
+		<icon path="artStuff/iconTWAOG.png" size="512" />
+		<icon path="artStuff/iconTWAOG.png" size="1024" />
+		<icon path="artStuff/iconTWAOG.png" size="2048" />
+		<icon path="artStuff/iconTWAOG.png" />
+	</section>
+
+	<section if="mobile">
+		<icon path="artStuff/icon_mobile.png" />
+	</section>
+
+	<!-- Setup defines from this project into game -->
+	<haxedef name="DEFAULT_EXCLUDE" if="DEFAULT_EXCLUDE" value="${DEFAULT_EXCLUDE}"/>
+	<haxedef name="DEV_BUILD" if="DEV_BUILD" value="${DEV_BUILD}"/>
+	<haxedef name="DISCORD_RPC" if="DISCORD_RPC" value="${DISCORD_RPC}"/>
+	<haxedef name="EMBED_FILES" if="EMBED_FILES" value="${EMBED_FILES}"/>
+	<haxedef name="HAXE_UI" if="HAXE_UI" value="${HAXE_UI}"/>
+	<haxedef name="HSCRIPT_ALLOWED" if="HSCRIPT_ALLOWED" value="${HSCRIPT_ALLOWED}"/>
+	<haxedef name="LUA_ALLOWED" if="LUA_ALLOWED" value="${LUA_ALLOWED}"/>
+	<haxedef name="MODS_ALLOWED" if="MODS_ALLOWED" value="${MODS_ALLOWED}"/>
+	<haxedef name="RELEASE_BUILD" if="RELEASE_BUILD" value="${RELEASE_BUILD}"/>
+	<haxedef name="THREE_D_ALLOWED" if="THREE_D_ALLOWED" value="${THREE_D_ALLOWED}"/>
+	<haxedef name="UPDATE_FEATURE" if="UPDATE_FEATURE" value="${UPDATE_FEATURE}"/>
+	<haxedef name="USE_SYS_ASSETS" if="USE_SYS_ASSETS" value="${USE_SYS_ASSETS}"/>
+	<haxedef name="VIDEOS_ALLOWED" if="VIDEOS_ALLOWED" value="${VIDEOS_ALLOWED}"/>
+	<haxedef name="ALLOW_HAPTICS" if="ALLOW_HAPTICS" value="${ALLOW_HAPTICS}"/>
+	<haxedef name="ALLOW_EIGHTSINES" if="ALLOW_EIGHTSINES" value="${ALLOW_EIGHTSINES}"/>
+	<haxedef name="TOUCH_CONTROLS" if="TOUCH_CONTROLS" value="${TOUCH_CONTROLS}"/>
+
+	<config:android target-sdk-version="33"/>
+
+	<haxedef name="BUILD_DIR" if="BUILD_DIR" value="${BUILD_DIR}"/>
+	<!-- <haxedef name="disable_preloader_assets" if="USE_SYS_ASSETS"/> -->
+
+</project>

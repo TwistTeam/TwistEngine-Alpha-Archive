@@ -1,0 +1,3 @@
+Value1: Additional Default Zoom
+Value2: Optional Tween Options (ease, time)
+Value3: Optional Camera (default: camGame)

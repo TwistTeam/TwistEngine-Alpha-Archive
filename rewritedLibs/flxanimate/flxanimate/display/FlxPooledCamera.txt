@@ -1,0 +1,53 @@
+package flxanimate.display;
+
+import flixel.FlxG;
+import flixel.util.FlxPool;
+import flxanimate.Utils;
+
+class FlxPooledCamera extends #if macro flixel.FlxCamera #else game.objects.improvedFlixel.FlxCamera #end implements IFlxPooled
+{
+	var _dirtyBlendUpdate:Bool = false;
+	static var pool:FlxPool<FlxPooledCamera> = new FlxPool(FlxPooledCamera);
+	public function put()
+	{
+		pool.put(this);
+	}
+	public static function get()
+	{
+		var camera = pool.get();
+		#if !macro
+		if (camera._dirtyBlendUpdate)
+		{
+			camera.loadCustomBlendShader(null);
+			camera._dirtyBlendUpdate = false;
+		}
+		#end
+		return camera;
+	}
+	#if !macro
+	public function new(X:Float = 0, Y:Float = 0, Width:Int = 0, Height:Int = 0, Zoom:Float = 0)
+	{
+		super(X, Y, Width, Height, Zoom, null);
+		game.Main.mainInstance.onFinalDraw.remove(__onFinalDraw);
+		FlxG.signals.preDraw.remove(__onPreDraw);
+		FlxG.signals.postDraw.remove(__onPostDraw);
+		FlxG.signals.preStateSwitch.add(__onPreStateSwitch);
+	}
+	@:noCompletion override function __get__rotated__matrix()
+	{
+		__angleMatrix.identity();
+		return __angleMatrix;
+	}
+	#end
+	function __onPreStateSwitch()
+	{
+		_dirtyBlendUpdate = true;
+	}
+	public override function destroy() {
+		Utils.clearCameraDraws(this);
+	}
+	public function superDestroy()
+	{
+		super.destroy();
+	}
+}

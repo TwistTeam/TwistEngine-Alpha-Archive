@@ -1,0 +1,22 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.trimAutoWhitespace": true,
+	"files.trimTrailingWhitespace": true,
+	"files.associations": {
+		"*.hx": "haxe",
+		"*.hscript": "haxe",
+		"*.hsc": "haxe",
+		"*.hxs": "haxe"
+	},
+	"haxe.displayPort": "auto",
+	"haxe.enableCompilationServer": false,
+	"haxe.enableServerView": true,
+	"haxe.exclude": [
+		"generated"
+	],
+	"haxecheckstyle.sourceFolders": ["source"],
+	"haxecheckstyle.externalSourceRoots": [],
+	"haxecheckstyle.configurationFile": "checkstyle.json",
+	"haxecheckstyle.codeSimilarityBufferSize": 100,
+}

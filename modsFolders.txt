@@ -1,0 +1,17 @@
+// 1. Create a folder with any name in your game directory. Example: "myModPack"
+
+// 2. Put mods inside this folder. Example structure:
+// bin/myModPack/Vs Garcello/ (with mod files inside. Vs Garcello - modpack folder name)
+
+// 3. Open modsFolders.txt
+
+// 4. Add the absolute path to your folder in this format:
+// E:/FNFStuff/TwistEngine/bin/myModPack/*
+// How to get the path:
+// Right-click the folder while holding Shift → "Copy as path"
+
+// 5. Paste into the file, remove quotes " at the start and end
+// Add /* at the end of the path
+// Save the file. Done!
+
+./mods/*

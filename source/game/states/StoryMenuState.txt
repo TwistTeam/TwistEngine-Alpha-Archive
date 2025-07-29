@@ -1,0 +1,2 @@
+package game.states;
+class StoryMenuState extends MusicBeatState {/**dummy**/}

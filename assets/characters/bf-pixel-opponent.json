@@ -1,0 +1,50 @@
+{
+	"animations": [
+		{
+			"offsets": [2, 0],
+			"anim": "idle",
+			"name": "BF IDLE"
+		},
+		{
+			"anim": "singUPmiss",
+			"name": "BF UP MISS"
+		},
+		{
+			"anim": "singUP",
+			"name": "BF UP NOTE"
+		},
+		{
+			"anim": "singDOWN",
+			"name": "BF DOWN NOTE"
+		},
+		{
+			"anim": "singDOWNmiss",
+			"name": "BF DOWN MISS"
+		},
+		{
+			"anim": "singLEFT",
+			"name": "BF RIGHT NOTE"
+		},
+		{
+			"anim": "singRIGHTmiss",
+			"name": "BF LEFT MISS"
+		},
+		{
+			"anim": "singLEFTmiss",
+			"name": "BF RIGHT MISS"
+		},
+		{
+			"anim": "singRIGHT",
+			"name": "BF LEFT NOTE"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/bfPixel",
+	"position": [80, 480],
+	"healthicon": "bf-pixel",
+	"flip_x": true,
+	"healthbar_colors": [123, 214, 246],
+	"camera_position": [50, -160],
+	"sing_duration": 4,
+	"scale": 6.8
+}

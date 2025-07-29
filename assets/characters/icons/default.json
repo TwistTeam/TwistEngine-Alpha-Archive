@@ -1,0 +1,23 @@
+{
+	"animations": [
+		{
+			"anim": "idle",
+			"fps": 0
+		},
+		{
+			"anim": "lose",
+			"fps": 0
+		}
+	],
+	"triggers": [
+		{
+			"name": "idle",
+			"indices": [21, 100]
+		},
+		{
+			"name": "lose",
+			"indices": [0, 20]
+		}
+	],
+	"image": "none"
+}
